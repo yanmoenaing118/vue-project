@@ -1,6 +1,4 @@
 <template>
-    
-      
       <div class="list">
         <div class="list-header mb-6 py-2 font-bold text-lg capitalize px-3 text-gray-900 font-serif">
           <div>#</div>
