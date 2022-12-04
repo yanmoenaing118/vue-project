@@ -23,7 +23,7 @@
   import PlayListItem from "./PlayListItem.vue";
 
   const props = defineProps({
-    list: []
+    list: Array
   })
   
   </script>

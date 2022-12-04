@@ -29,7 +29,7 @@
       </div>
       <div class="progress flex gap-6 justify-center items-center">
         <div class="text-sm text-gray-500">3:04</div>
-        <div class="progress__bar bg-gray-200">
+        <div class="progress__bar bg-gray-200" ref="progressBarElementRef">
           <div
             class="progress__bar-progress"
             :style="`width: ${audioProgress}%`"
@@ -42,29 +42,44 @@
 </template>
 
 <script setup>
+import { CoSn } from "oh-vue-icons/icons";
 import { onMounted, ref } from "vue";
 import Container from "./Container.vue";
 
 const PLAYING = "PLAYING";
 const STOPPING = "STOPPING";
+const PROGRESS_WIDTH = 320;
 
 const audio = ref(null);
+const progressBarElementRef = ref(null);
 const audioPlayState = ref(STOPPING);
 const audioProgress = ref(0);
 
 onMounted(() => {
   console.log(audio.value);
   audio.value.addEventListener("timeupdate", onAudioTimeAupdate);
+  progressBarElementRef.value.addEventListener(
+    "click",
+    getPointerClickedPosition
+  );
 });
 
+function isAudioValid() {
+  return audio.value;
+}
+
 function play() {
-  audio.value.play();
-  audioPlayState.value = PLAYING;
+  if (isAudioValid()) {
+    audio.value.play();
+    audioPlayState.value = PLAYING;
+  }
 }
 
 function pause() {
-  audio.value.pause();
-  audioPlayState.value = STOPPING;
+  if (isAudioValid()) {
+    audio.value.pause();
+    audioPlayState.value = STOPPING;
+  }
 }
 
 function togglePlayState() {
@@ -76,15 +91,29 @@ function togglePlayState() {
 }
 
 function onAudioTimeAupdate(e) {
-  console.log(e.target);
+  if (!isAudioValid()) return;
   const audio = e.target;
   const duration = audio.duration;
   const current = audio.currentTime;
-  const width = Math.floor((current / duration) * 100);
+  const width = Math.round((current / duration) * 100);
   audioProgress.value = width;
 }
 
 function setCurrentTime() {}
+
+function getPointerClickedPosition(event) {
+  if (!progressBarElementRef.value) return;
+  const { x: progressBarPostion } =
+    progressBarElementRef.value.getBoundingClientRect();
+  const pointerPositionX = event.clientX;
+  const clickedPosition = pointerPositionX - progressBarPostion;
+  const clickedPercent = Math.round((clickedPosition / PROGRESS_WIDTH) * 100);
+  const currentTimeByClickedPositionPercent = Math.round(
+    (clickedPercent / 100) * audio.value.duration
+  );
+
+  audio.value.currentTime = currentTimeByClickedPositionPercent;
+}
 </script>
 
 <style lang="scss" scoped>
