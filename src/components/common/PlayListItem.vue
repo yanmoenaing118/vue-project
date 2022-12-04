@@ -3,11 +3,12 @@
       <div>
           <v-icon name="bi-music-note-beamed" ></v-icon>
       </div>
-      <div>
+      <div >
         <img
           :src="item.picture"
           :alt="item.title"
           class="w-12 h-12 object-cover"
+          @click="playerStore.setPlayer(item)"
         />
       </div>
       <div>
@@ -21,10 +22,13 @@
   
   <script setup>
   import { defineProps } from "vue";
+import { usePlayerStore } from "../../stores/counter";
   
   const props = defineProps({
     item: Object,
   });
+
+  const playerStore = usePlayerStore();
   </script>
   
   <style lang="scss" scoped>

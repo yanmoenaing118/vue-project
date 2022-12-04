@@ -18,8 +18,6 @@
   
   <script setup>
   import { defineProps } from "vue";
-  import { RouterLink } from "vue-router";
-  import Container from "../layout/Container.vue";
   import PlayListItem from "./PlayListItem.vue";
 
   const props = defineProps({

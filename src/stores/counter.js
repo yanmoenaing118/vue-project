@@ -10,3 +10,24 @@ export const useCounterStore = defineStore("counter", () => {
 
   return { count, doubleCount, increment };
 });
+
+export const usePlayerStore = defineStore("player", {
+  state: () => {
+    return {
+      player: null,
+    };
+  },
+
+  getters: {
+    getPlayer: () => player,
+  },
+
+  actions: {
+    setPlayer(player) {
+      console.log(player);
+      this.player = player;
+    },
+  },
+
+  
+});

@@ -1,26 +1,15 @@
 <template>
-  <div
-    class="fixed z-10 bottom-0 w-full h-28 border-t flex items-center bg-white"
-  >
-    <audio
-      src="https://myplaylist.vercel.app/static/media/here_i_am_again.1e8e27f3.mp3"
-      controls
-      ref="audio"
-    ></audio>
+  <div class="fixed z-10 bottom-0 w-full h-28 border-t flex items-center bg-white">
+    <audio :src="player.src" controls ref="audio"></audio>
 
     <Container>
-      <div
-        class="controls flex justify-center gap-6 items-center text-gray-600"
-      >
+      <div class="controls flex justify-center gap-6 items-center text-gray-600">
         <button>
           <v-icon name="co-media-skip-backward" scale="2"></v-icon>
         </button>
 
         <button @click="togglePlayState()">
-          <v-icon
-            :name="`co-media-${audioPlayState === STOPPING ? 'play' : 'pause'}`"
-            scale="3"
-          ></v-icon>
+          <v-icon :name="`co-media-${audioPlayState === STOPPING ? 'play' : 'pause'}`" scale="3"></v-icon>
         </button>
 
         <button>
@@ -30,10 +19,7 @@
       <div class="progress flex gap-6 justify-center items-center">
         <div class="text-sm text-gray-500">3:04</div>
         <div class="progress__bar bg-gray-200" ref="progressBarElementRef">
-          <div
-            class="progress__bar-progress"
-            :style="`width: ${audioProgress}%`"
-          ></div>
+          <div class="progress__bar-progress" :style="`width: ${audioProgress}%`"></div>
         </div>
         <div class="text-sm text-gray-500">0:00</div>
       </div>
@@ -42,9 +28,14 @@
 </template>
 
 <script setup>
-import { CoSn } from "oh-vue-icons/icons";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineProps } from "vue";
 import Container from "./Container.vue";
+
+const props = defineProps({
+  player: Object,
+});
+
+
 
 const PLAYING = "PLAYING";
 const STOPPING = "STOPPING";
@@ -99,7 +90,7 @@ function onAudioTimeAupdate(e) {
   audioProgress.value = width;
 }
 
-function setCurrentTime() {}
+function setCurrentTime() { }
 
 function getPointerClickedPosition(event) {
   if (!progressBarElementRef.value) return;
@@ -127,6 +118,7 @@ audio {
     height: 4px;
     border-radius: 4px;
     position: relative;
+
     &-progress {
       border-radius: 4px;
       display: block;

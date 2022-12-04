@@ -24,6 +24,7 @@ const songs = ref([
     album: "1998",
     picture:
       "https://i0.wp.com/www.globalgranary.life/wp-content/uploads/2018/06/Zhao-Lu-Si.jpeg?ssl=1",
+    src: "https://myplaylist.vercel.app/static/media/here_i_am_again.1e8e27f3.mp3",
   },
   {
     id: 2,
@@ -33,6 +34,7 @@ const songs = ref([
     album: "1998",
     picture:
       "https://www.pinkvilla.com/files/styles/amp_metadata_content_image/public/go_yoo_jung_main.jpeg",
+    src: "https://myplaylist.vercel.app/static/media/here_i_am_again.1e8e27f3.mp3",
   },
   {
     id: 3,
@@ -42,6 +44,7 @@ const songs = ref([
     album: "DOTS OST",
     picture:
       "https://0.soompi.io/wp-content/uploads/2022/11/14214254/315595155_697255911770881_3042158866055911006_n.jpg",
+    src: "https://myplaylist.vercel.app/static/media/here_i_am_again.1e8e27f3.mp3",
   },
 ]);
 </script>
