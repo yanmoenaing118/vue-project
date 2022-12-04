@@ -1,9 +1,9 @@
 <script setup>
-import PlayListVue from '../components/home/PlayList.vue';
+import HomePlayList from '../components/home/HomePlayList.vue';
 </script>
 
 <template>
-  <PlayListVue />
+  <HomePlayList />
 </template>
 
 <style scoped>
